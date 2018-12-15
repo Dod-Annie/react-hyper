@@ -1,2 +1,3 @@
 # react-hyper
-A minimal pragmatic state container for react apps
+
+A minimal pragmatic state management tool for react apps
