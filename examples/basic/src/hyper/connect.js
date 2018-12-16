@@ -1,12 +1,18 @@
 import React from 'react'
 import Context from './context'
 
-const connect = () => Component => {
-  class Connect extends React.Component {
+const connect = store => Component => {
+  class Connect extends React.PureComponent {
+    constructor(props) {
+      super(props)
+      this.state = {
+        store
+      }
+    }
     render() {
       return (
         <Context.Consumer>
-          {context => <Component context={context} />}
+          {context => <Component store={context[this.state.store]} />}
         </Context.Consumer>
       )
     }
