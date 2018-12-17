@@ -7,7 +7,7 @@ import rootStore from './stores/root'
 console.log('rootStore', rootStore)
 
 ReactDOM.render(
-  <Provider store={rootStore}>
+  <Provider initStore={rootStore}>
     <Index />
   </Provider>,
   document.getElementById('root')

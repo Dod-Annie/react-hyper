@@ -1,32 +1,37 @@
-import React, { Component } from 'react'
+import React from 'react'
 import Context from './context'
 import PropTypes from 'prop-types'
 
-class Provider extends Component {
+class Provider extends React.Component {
   constructor(props) {
     super(props)
-
-    this.actions = newState => {
-      this.setState({
-        state: newState
-      })
-    }
-
-    const { store } = props
-
-    for (let key in store) {
-      for (let action in store[key].actions) {
-        console.log(store[key].actions[action], 'action')
-      }
-    }
+    const { initStore } = props
 
     this.state = {
-      store
+      store: Object.assign({}, initStore)
+    }
+  }
+
+  componentDidMount() {
+    const { initStore } = this.props
+    const update = store => this.setState({ store })
+    for (const storeName in initStore) {
+      let store = initStore[storeName]
+      store.initActions = Object.assign({}, store.actions)
+      store.actions = {}
+      for (const actionName in store.initActions) {
+        store.actions[actionName] = function(data) {
+          const oldState = Object.assign({}, store.state)
+          store.initActions[actionName](data)(store)
+          if (oldState !== store.state) {
+            update(initStore)
+          }
+        }
+      }
     }
   }
 
   render() {
-    console.log(this.state, 'provider State')
     return (
       <Context.Provider value={this.state.store}>
         {this.props.children}
@@ -36,7 +41,7 @@ class Provider extends Component {
 }
 
 Provider.propTypes = {
-  store: PropTypes.object.isRequired,
+  initStore: PropTypes.object.isRequired,
   context: PropTypes.object,
   children: PropTypes.any
 }
