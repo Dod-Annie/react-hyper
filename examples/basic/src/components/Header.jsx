@@ -3,12 +3,11 @@ import { connect } from '../hyper'
 
 class Header extends React.Component {
   render() {
-    console.log('header render', this.props)
     const { store } = this.props
+    console.log('header render', store.actions.changeColor)
     return (
       <div style={{ color: store.state.headerColor }}>
         Header
-        <br />
         <button onClick={() => store.actions.changeColor()}>changeColor</button>
       </div>
     )

@@ -2,9 +2,14 @@ const state = {
   headerColor: 'red'
 }
 
+var getRandomColor = function() {
+  return '#' + Math.floor(Math.random() * 16777215).toString(16)
+}
+
 const changeColor = () => ({ state, actions }) => {
-  state.headerColor = 'blue'
-  actions.testAction('test')
+  console.log('changeColor')
+  state.headerColor = getRandomColor()
+  // actions.testAction('test')
 }
 
 const testAction = test => ({ state }) => {

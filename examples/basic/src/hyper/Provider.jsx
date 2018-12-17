@@ -20,11 +20,13 @@ class Provider extends React.Component {
       store.initActions = Object.assign({}, store.actions)
       store.actions = {}
       for (const actionName in store.initActions) {
-        store.actions[actionName] = function(data) {
+        console.log(storeName, store, actionName)
+        store.actions[actionName] = async function(...data) {
           const oldState = Object.assign({}, store.state)
-          store.initActions[actionName](data)(store)
+          await store.initActions[actionName](...data)(store)
           if (oldState !== store.state) {
-            update(initStore)
+            console.log('provider render')
+            update(Object.assign({}, initStore))
           }
         }
       }
