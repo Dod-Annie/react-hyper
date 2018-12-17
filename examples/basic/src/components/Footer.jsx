@@ -13,7 +13,13 @@ class Footer extends React.Component {
     return (
       <div style={{ color: footerColor }}>
         Footer
-        <button onClick={() => changeColor()}>changeColor</button>
+        <button
+          onClick={() => {
+            changeColor()
+          }}
+        >
+          changeColor
+        </button>
         <button onClick={() => asyncPrint(1000, 'ss')}>async click</button>
         <span>{text}</span>
       </div>

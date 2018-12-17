@@ -12,7 +12,7 @@ class Provider extends React.Component {
     }
   }
 
-  componentDidMount() {
+  componentWillMount() {
     const { initStore } = this.props
     const update = store => this.setState({ store })
     for (const storeName in initStore) {
@@ -25,7 +25,6 @@ class Provider extends React.Component {
           const oldState = Object.assign({}, store.state)
           await store.initActions[actionName](...data)(store)
           if (oldState !== store.state) {
-            console.log('provider render')
             update(Object.assign({}, initStore))
           }
         }

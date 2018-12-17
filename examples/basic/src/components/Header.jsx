@@ -8,7 +8,13 @@ class Header extends React.Component {
     return (
       <div style={{ color: store.state.headerColor }}>
         Header
-        <button onClick={() => store.actions.changeColor()}>changeColor</button>
+        <button
+          onClick={() => {
+            store.actions.changeColor()
+          }}
+        >
+          changeColor
+        </button>
       </div>
     )
   }
