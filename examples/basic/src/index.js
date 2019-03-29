@@ -6,9 +6,15 @@ import rootStore from './stores/root'
 
 console.log('rootStore', rootStore)
 
+
 ReactDOM.render(
   <Provider initStore={rootStore}>
     <Index />
   </Provider>,
   document.getElementById('root')
 )
+
+
+
+
+
